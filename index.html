@@ -3,35 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>7. Sınıf Fen Bilimleri - Berk'in Platformu</title>
+  <title>Berk'in 7. Sınıf Fen Kampüsü</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   
   <style>
     :root {
-      --bg: #f8f9fa;
+      --bg: #f9faff;          /* Hafif mor-beyaz arka */
       --card-bg: #ffffff;
-      --text: #1a1a1a;
-      --primary: #4361ee;
-      --primary-dark: #3f37c9;
-      --accent: #ff6b6b;
+      --text: #1a1a2e;
+      --primary: #6a5acd;     /* Mor ana renk */
+      --primary-dark: #483d8b;
+      --accent: #ba55d3;      /* Mor-pembe accent */
       --gray: #6c757d;
-      --border: #dee2e6;
-      --sidebar-bg: #ffffff;
-      --sidebar-text: #333;
+      --border: #d4c4fb;
+      --sidebar-bg: #f0e8ff;  /* Hafif mor kenar */
     }
     
     [data-theme="dark"] {
-      --bg: #0f1117;
-      --card-bg: #161b22;
-      --text: #e6edf3;
-      --primary: #5e60ce;
-      --primary-dark: #4d4dff;
-      --accent: #ff758c;
-      --gray: #8b949e;
-      --border: #30363d;
-      --sidebar-bg: #161b22;
-      --sidebar-text: #e6edf3;
+      --bg: #0f0b1a;
+      --card-bg: #1a1433;
+      --text: #e0d4ff;
+      --primary: #9f7aea;
+      --primary-dark: #7c3aed;
+      --accent: #d6a2e8;
+      --gray: #a0a0c0;
+      --border: #4a3b7c;
+      --sidebar-bg: #1a1433;
     }
     
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -41,13 +39,13 @@
       color: var(--text);
       min-height: 100vh;
       line-height: 1.6;
-      transition: background 0.4s, color 0.4s;
+      transition: all 0.4s;
     }
     
     header {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: white;
-      padding: 2.5rem 1rem 4rem;
+      padding: 4rem 1rem 5rem;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -58,134 +56,50 @@
       position: absolute;
       top: -50%; left: -50%;
       width: 200%; height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
-      animation: rotate 25s linear infinite;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+      animation: rotate 30s linear infinite;
     }
     
     @keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     
-    h1 { font-size: 3.2rem; margin-bottom: 0.6rem; text-shadow: 0 3px 10px rgba(0,0,0,0.4); }
-    .subtitle { font-size: 1.3rem; opacity: 0.95; }
+    h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 0.8rem; text-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+    .subtitle { font-size: clamp(1.2rem, 4vw, 1.6rem); opacity: 0.95; }
+    
+    .decor-left, .decor-right {
+      position: absolute;
+      font-size: 8rem;
+      opacity: 0.15;
+      color: white;
+    }
+    .decor-left { top: 20%; left: 5%; transform: rotate(-15deg); }
+    .decor-right { bottom: 15%; right: 5%; transform: rotate(15deg); }
     
     .theme-toggle {
       position: absolute;
-      top: 1.2rem; right: 1.2rem;
-      background: rgba(255,255,255,0.2);
+      top: 1.5rem; right: 1.5rem;
+      background: rgba(255,255,255,0.25);
       border: none;
       color: white;
-      font-size: 1.4rem;
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.3s;
-    }
-    .theme-toggle:hover { background: rgba(255,255,255,0.35); transform: scale(1.1); }
-    
-    /* Sidebar Menü */
-    .sidebar {
-      position: fixed;
-      top: 0; left: -280px;
-      width: 280px;
-      height: 100%;
-      background: var(--sidebar-bg);
-      border-right: 1px solid var(--border);
-      transition: left 0.4s ease;
-      z-index: 999;
-      overflow-y: auto;
-      box-shadow: 2px 0 15px rgba(0,0,0,0.2);
-    }
-    
-    .sidebar.active { left: 0; }
-    
-    .sidebar-header {
-      background: var(--primary);
-      color: white;
-      padding: 1.5rem;
-      text-align: center;
-      font-size: 1.4rem;
-      font-weight: bold;
-    }
-    
-    .sidebar ul {
-      list-style: none;
-      padding: 1rem 0;
-    }
-    
-    .sidebar li a {
-      display: block;
-      padding: 1rem 1.5rem;
-      color: var(--sidebar-text);
-      text-decoration: none;
-      font-size: 1.1rem;
-      transition: all 0.3s;
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .sidebar li a:hover,
-    .sidebar li a.active {
-      background: rgba(67,97,238,0.1);
-      color: var(--primary);
-      padding-left: 2rem;
-    }
-    
-    .sidebar li a i { margin-right: 0.8rem; width: 20px; text-align: center; }
-    
-    /* Hamburger Menü Butonu */
-    .menu-toggle {
-      position: fixed;
-      top: 1.2rem; left: 1.2rem;
-      background: var(--primary);
-      color: white;
-      border: none;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       width: 50px; height: 50px;
       border-radius: 50%;
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      z-index: 1000;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       transition: all 0.3s;
     }
-    .menu-toggle:hover { transform: scale(1.1); }
+    .theme-toggle:hover { background: rgba(255,255,255,0.4); transform: scale(1.1); }
     
-    /* Overlay (menü açıkken arka planı kapatmak için) */
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.4s;
-      z-index: 998;
-    }
-    .overlay.active { opacity: 1; visibility: visible; }
-    
-    nav {
-      background: var(--card-bg);
-      padding: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid var(--border);
-      margin-left: 0;
-      transition: margin-left 0.4s;
-    }
-    
-    .sidebar.active \~ nav { margin-left: 280px; }
-    
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 1rem; }
     
     .search-box {
-      width: 100%; max-width: 600px;
-      margin: 1.5rem auto;
+      max-width: 700px;
+      margin: 2rem auto;
       position: relative;
     }
     
     #searchInput {
       width: 100%;
-      padding: 1rem 1rem 1rem 3.5rem;
+      padding: 1.2rem 1.2rem 1.2rem 4rem;
       border: 2px solid var(--border);
       border-radius: 50px;
       font-size: 1.1rem;
@@ -193,302 +107,168 @@
       color: var(--text);
       transition: all 0.3s;
     }
-    #searchInput:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(67,97,238,0.15);
-    }
+    #searchInput:focus { border-color: var(--primary); box-shadow: 0 0 0 5px rgba(106,90,205,0.2); }
     
-    .search-icon {
-      position: absolute;
-      left: 1.2rem; top: 50%;
-      transform: translateY(-50%);
-      color: var(--gray);
-      font-size: 1.3rem;
-    }
+    .search-icon { position: absolute; left: 1.5rem; top: 50%; transform: translateY(-50%); color: var(--gray); font-size: 1.4rem; }
     
-    .unit-grid {
+    .units-wrapper {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.6rem;
-      margin: 2.5rem 0;
+      grid-template-columns: 1fr 3fr 1fr;  /* Sol - Orta içerik - Sağ */
+      gap: 2rem;
+      margin: 3rem 0;
     }
     
-    .unit-card {
+    .unit-sidebar {
+      background: var(--sidebar-bg);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      border: 1px solid var(--border);
+    }
+    
+    .unit-sidebar h3 { color: var(--primary); margin-bottom: 1.5rem; font-size: 1.4rem; }
+    
+    .unit-sidebar ul { list-style: none; }
+    .unit-sidebar li a {
+      display: block;
+      padding: 1rem;
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+    .unit-sidebar li a:hover, .unit-sidebar li a.active {
+      background: rgba(106,90,205,0.15);
+      color: var(--primary);
+      padding-left: 1.5rem;
+    }
+    
+    .main-content { 
       background: var(--card-bg);
       border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
+      padding: 2rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
       border: 1px solid var(--border);
     }
     
-    .unit-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
-    }
+    .unit-section { margin-bottom: 4rem; padding: 2rem; border-bottom: 1px solid var(--border); }
+    .unit-section:last-child { border-bottom: none; }
     
-    .unit-header {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: white;
-      padding: 1.4rem;
-      font-size: 1.4rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+    .unit-title { color: var(--primary); font-size: 2.2rem; margin-bottom: 1.5rem; }
     
-    .unit-content {
-      padding: 1.6rem;
-    }
-    
-    details {
-      margin: 1.2rem 0;
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-    }
-    
-    summary {
-      padding: 1.2rem 1.6rem;
-      font-size: 1.15rem;
-      font-weight: 600;
-      background: rgba(67,97,238,0.06);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      transition: background 0.3s;
-    }
-    
-    summary:hover { background: rgba(67,97,238,0.12); }
-    
-    .topic-content {
-      padding: 1.6rem;
-      background: var(--card-bg);
-    }
-    
-    .topic-content img {
-      max-width: 100%;
-      border-radius: 12px;
-      margin: 1.2rem 0;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-    }
-    
-    .highlight {
-      background: rgba(255,107,107,0.12);
-      padding: 1rem;
-      border-radius: 10px;
-      border-left: 5px solid var(--accent);
-      margin: 1.2rem 0;
+    @media (max-width: 992px) {
+      .units-wrapper { grid-template-columns: 1fr; }
+      .unit-sidebar { order: -1; }  /* Mobil'de ünite listesi üste gelsin */
     }
     
     footer {
-      background: var(--card-bg);
       text-align: center;
-      padding: 2.5rem 1rem;
-      margin-top: 4rem;
-      border-top: 1px solid var(--border);
+      padding: 3rem 1rem;
       color: var(--gray);
-    }
-    
-    @media (min-width: 992px) {
-      .sidebar { left: 0; }
-      .menu-toggle { display: none; }
-      nav { margin-left: 280px; }
-      .container { padding-left: 300px; }
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
     }
   </style>
 </head>
 <body>
 
-<!-- Hamburger Menü Butonu -->
-<button class="menu-toggle" id="menuBtn"><i class="fas fa-bars"></i></button>
-
-<!-- Overlay -->
-<div class="overlay" id="overlay"></div>
-
-<!-- Sidebar Menü -->
-<div class="sidebar" id="sidebar">
-  <div class="sidebar-header">7. Sınıf Fen Bilimleri</div>
-  <ul id="unitMenu">
-    <li><a href="#unit1" class="active"><i class="fas fa-rocket"></i> 1. Güneş Sistemi ve Ötesi</a></li>
-    <li><a href="#unit2"><i class="fas fa-dna"></i> 2. Hücre ve Bölünmeler</a></li>
-    <li><a href="#unit3"><i class="fas fa-magnet"></i> 3. Kuvvet ve Enerji</a></li>
-    <li><a href="#unit4"><i class="fas fa-flask"></i> 4. Saf Madde ve Karışımlar</a></li>
-    <li><a href="#unit5"><i class="fas fa-lightbulb"></i> 5. Işığın Madde ile Etkileşimi</a></li>
-    <li><a href="#unit6"><i class="fas fa-seedling"></i> 6. Canlılarda Üreme, Büyüme ve Gelişme</a></li>
-    <li><a href="#unit7"><i class="fas fa-bolt"></i> 7. Elektrik Devreleri</a></li>
-  </ul>
-</div>
-
 <header>
   <button class="theme-toggle" id="themeBtn" title="Temayı değiştir"><i class="fas fa-moon"></i></button>
-  <h1>7. Sınıf Fen Bilimleri</h1>
-  <p class="subtitle">Tüm üniteler menüde! Kolayca seç, oku, öğren 🚀 Berk için özel</p>
+  <h1>Berk'in 7. Sınıf Fen Kampüsü</h1>
+  <p class="subtitle">Tüm üniteler burada! Seç, oku, öğren 🚀 Mor enerjili fen dünyası</p>
+  <i class="fas fa-book-open decor-left"></i>
+  <i class="fas fa-flask decor-right"></i>
 </header>
 
-<nav>
-  <div class="container">
-    <div class="search-box">
-      <i class="fas fa-search search-icon"></i>
-      <input type="text" id="searchInput" placeholder="Konu ara... (ör: fotosentez, uzay, hücre)">
-    </div>
-  </div>
-</nav>
-
 <div class="container">
-
-  <div class="unit-grid">
-    
-    <div class="unit-card" id="unit1">
-      <div class="unit-header">
-        <i class="fas fa-rocket fa-xl"></i>
-        1. Ünite – Güneş Sistemi ve Ötesi
-      </div>
-      <div class="unit-content">
-        <!-- Buraya önceki detaylı içerik geldi, sen genişlet -->
-        **Summary:**
-<i class="fas fa-satellite"></i> Uzay Araştırmaları
-          <div class="topic-content">
-            <p>Uzay araştırmaları, teleskoplar, uydular, uzay istasyonları...</p>
-            <!-- Tam metin + resimler buraya -->
-            <img src="https://images.unsplash.com/photo-1468476396571-4d6f2a4274e4?w=800" alt="Uzay araştırmaları">
-          </div>
-        <!-- Diğer konular... -->
-      </div>
-    </div>
-
-    <div class="unit-card" id="unit2">
-      <div class="unit-header">
-        <i class="fas fa-dna fa-xl"></i>
-        2. Ünite – Hücre ve Bölünmeler
-      </div>
-      <div class="unit-content">
-        <p>Hücre yapısı, mitoz, mayoz...</p>
-        <!-- İçerik ekle -->
-      </div>
-    </div>
-
-    <div class="unit-card" id="unit3">
-      <div class="unit-header">
-        <i class="fas fa-magnet fa-xl"></i>
-        3. Ünite – Kuvvet ve Enerji
-      </div>
-      <div class="unit-content">
-        <p>Kuvvet, iş, enerji dönüşümleri...</p>
-      </div>
-    </div>
-
-    <div class="unit-card" id="unit4">
-      <div class="unit-header">
-        <i class="fas fa-flask fa-xl"></i>
-        4. Ünite – Saf Madde ve Karışımlar
-      </div>
-      <div class="unit-content">
-        <p>Atom, molekül, karışım ayrıştırma...</p>
-      </div>
-    </div>
-
-    <div class="unit-card" id="unit5">
-      <div class="unit-header">
-        <i class="fas fa-lightbulb fa-xl"></i>
-        5. Ünite – Işığın Madde ile Etkileşimi
-      </div>
-      <div class="unit-content">
-        <p>Işığın yansıması, kırılması, mercekler...</p>
-      </div>
-    </div>
-
-    <div class="unit-card" id="unit6">
-      <div class="unit-header">
-        <i class="fas fa-seedling fa-xl"></i>
-        6. Ünite – Canlılarda Üreme, Büyüme ve Gelişme
-      </div>
-      <div class="unit-content">
-        <p>Üreme türleri, büyüme süreçleri...</p>
-      </div>
-    </div>
-
-    <div class="unit-card" id="unit7">
-      <div class="unit-header">
-        <i class="fas fa-bolt fa-xl"></i>
-        7. Ünite – Elektrik Devreleri
-      </div>
-      <div class="unit-content">
-        <p>Elektrik akımı, devre elemanları, Ohm kanunu...</p>
-      </div>
-    </div>
-
+  <div class="search-box">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" id="searchInput" placeholder="Konu ara... (ör: hücre, enerji, uzay)">
   </div>
 
+  <div class="units-wrapper">
+    <!-- Sol Sidebar: Ünite Listesi -->
+    <div class="unit-sidebar">
+      <h3>Üniteler</h3>
+      <ul id="unitMenu">
+        <li><a href="#unit1" class="active"><i class="fas fa-rocket"></i> 1. Güneş Sistemi ve Ötesi</a></li>
+        <li><a href="#unit2"><i class="fas fa-dna"></i> 2. Hücre ve Bölünmeler</a></li>
+        <li><a href="#unit3"><i class="fas fa-magnet"></i> 3. Kuvvet ve Enerji</a></li>
+        <li><a href="#unit4"><i class="fas fa-flask"></i> 4. Saf Madde ve Karışımlar</a></li>
+        <li><a href="#unit5"><i class="fas fa-lightbulb"></i> 5. Işığın Madde ile Etkileşimi</a></li>
+        <li><a href="#unit6"><i class="fas fa-seedling"></i> 6. Canlılarda Üreme, Büyüme ve Gelişme</a></li>
+        <li><a href="#unit7"><i class="fas fa-bolt"></i> 7. Elektrik Devreleri</a></li>
+      </ul>
+    </div>
+
+    <!-- Orta: Ana İçerik -->
+    <div class="main-content">
+      <section id="unit1" class="unit-section">
+        <h2 class="unit-title">1. Güneş Sistemi ve Ötesi</h2>
+        <p>Buraya detaylı içerik + resimler gelecek (uzay araştırmaları, teleskop vs.)</p>
+        <!-- Örnek resim: <img src="https://images.unsplash.com/photo-1447433589675-4aaa569f3e05?w=800" alt="Güneş Sistemi"> -->
+      </section>
+
+      <section id="unit2" class="unit-section">
+        <h2 class="unit-title">2. Hücre ve Bölünmeler</h2>
+        <p>Hücre yapısı, mitoz, mayoz... Detay buraya</p>
+      </section>
+
+      <!-- Diğer üniteler aynı şekilde... -->
+
+      <section id="unit7" class="unit-section">
+        <h2 class="unit-title">7. Elektrik Devreleri</h2>
+        <p>Devre elemanları, akım vs. buraya</p>
+      </section>
+    </div>
+
+    <!-- Sağ Sidebar: Boş veya ekstra dekor (kitap ikonları vs.) -->
+    <div class="unit-sidebar">
+      <h3>Fen Köşesi</h3>
+      <p>Deney yap, öğren! 🔬</p>
+      <i class="fas fa-atom" style="font-size: 4rem; opacity: 0.3; display: block; text-align: center; margin: 2rem 0;"></i>
+      <i class="fas fa-microscope" style="font-size: 4rem; opacity: 0.3; display: block; text-align: center;"></i>
+    </div>
+  </div>
 </div>
 
 <footer>
-  <p>© 2026 Berk’in Fen Platformu • MEB Müfredatı • Menü ile kolay erişim 😎</p>
+  <p>© 2026 Berk’in Fen Kampüsü • MEB Müfredatı • Mor enerjili öğrenme macerası 💜</p>
 </footer>
 
 <script>
-// Menü aç/kapa
-const menuBtn = document.getElementById('menuBtn');
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('overlay');
-
-menuBtn.addEventListener('click', () => {
-  sidebar.classList.toggle('active');
-  overlay.classList.toggle('active');
+// Tema değiştirme
+const themeBtn = document.getElementById('themeBtn');
+const html = document.documentElement;
+themeBtn.addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+  themeBtn.innerHTML = current === 'dark' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
 });
 
-overlay.addEventListener('click', () => {
-  sidebar.classList.remove('active');
-  overlay.classList.remove('active');
-});
-
-// Menü linklerine tıklayınca aktif yap + smooth scroll
+// Ünite linkleri tıklama + aktif yap + smooth scroll
 const menuLinks = document.querySelectorAll('#unitMenu a');
 menuLinks.forEach(link => {
   link.addEventListener('click', function(e) {
     e.preventDefault();
     const targetId = this.getAttribute('href').substring(1);
     
-    // Aktif sınıfı kaldır/ekle
     menuLinks.forEach(l => l.classList.remove('active'));
     this.classList.add('active');
     
-    // Smooth scroll
     document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
-    
-    // Mobil'de menüyü kapat
-    if (window.innerWidth < 992) {
-      sidebar.classList.remove('active');
-      overlay.classList.remove('active');
-    }
   });
 });
 
-// Karanlık mod
-const themeBtn = document.getElementById('themeBtn');
-const html = document.documentElement;
-
-themeBtn.addEventListener('click', () => {
-  const current = html.getAttribute('data-theme');
-  html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
-  themeBtn.innerHTML = current === 'dark' 
-    ? '<i class="fas fa-moon"></i>' 
-    : '<i class="fas fa-sun"></i>';
-});
-
-// Arama özelliği (önceki gibi)
+// Arama (basit filtre, section'ları gizle/göster)
 document.getElementById('searchInput').addEventListener('input', function(e) {
   const term = e.target.value.toLowerCase();
-  document.querySelectorAll('details').forEach(detail => {
-    const text = detail.textContent.toLowerCase();
-    detail.style.display = text.includes(term) ? '' : 'none';
+  document.querySelectorAll('.unit-section').forEach(section => {
+    const text = section.textContent.toLowerCase();
+    section.style.display = text.includes(term) ? '' : 'none';
   });
 });
 </script>
 
 </body>
-          </html>
+        </html>
