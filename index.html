@@ -1,136 +1,203 @@
-<!DOCTYPE html><html lang="tr">
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNIPOTENCE V48 | ENTERPRISE KERNEL</title><script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/ace.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.0/ext-language_tools.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-database-compat.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>7. Sınıf Fen Bilimleri - 2. Dönem Süper Site 🚀</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg: #f0f4f8;
+      --card-bg: #ffffff;
+      --text: #111827;
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --accent: #ec4899;
+      --gray: #6b7280;
+      --border: #d1d5db;
+    }
+    [data-theme="dark"] {
+      --bg: #111827;
+      --card-bg: #1f2937;
+      --text: #f3f4f6;
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --accent: #f472b6;
+      --gray: #9ca3af;
+      --border: #374151;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; transition: all 0.4s ease; }
+    header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 4rem 1rem 5.5rem; text-align: center; position: relative; overflow: hidden; }
+    header::before { content:""; position: absolute; top: -60%; left: -60%; width: 220%; height: 220%; background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 55%); animation: rotate 35s linear infinite; }
+    @keyframes rotate { to { transform: rotate(360deg); } }
+    h1 { font-size: 3.8rem; margin-bottom: 0.8rem; text-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+    .subtitle { font-size: 1.5rem; opacity: 0.92; }
+    .theme-toggle { position: absolute; top: 1.8rem; right: 1.8rem; background: rgba(255,255,255,0.22); border: none; color: white; font-size: 1.6rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .theme-toggle:hover { background: rgba(255,255,255,0.4); transform: scale(1.12) rotate(15deg); }
+    nav { background: var(--card-bg); padding: 1.2rem; box-shadow: 0 6px 16px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
+    .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+    .search-box { max-width: 750px; margin: 2.5rem auto; position: relative; }
+    #searchInput { width: 100%; padding: 1.3rem 1.3rem 1.3rem 4.5rem; border: 3px solid var(--border); border-radius: 999px; font-size: 1.2rem; background: var(--card-bg); color: var(--text); transition: all 0.3s; }
+    #searchInput:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 6px rgba(79,70,229,0.18); }
+    .search-icon { position: absolute; left: 1.6rem; top: 50%; transform: translateY(-50%); color: var(--gray); font-size: 1.5rem; }
+    .unit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 2rem; margin: 3.5rem 0; }
+    .unit-card { background: var(--card-bg); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.12); transition: all 0.4s ease; border: 1px solid var(--border); }
+    .unit-card:hover { transform: translateY(-12px); box-shadow: 0 25px 60px rgba(0,0,0,0.18); }
+    .unit-header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 1.8rem; font-size: 1.6rem; font-weight: 700; display: flex; align-items: center; gap: 1.3rem; }
+    .unit-content { padding: 2rem; }
+    details { margin: 1.6rem 0; border-radius: 16px; overflow: hidden; background: var(--card-bg); border: 1px solid var(--border); transition: all 0.3s; }
+    summary { padding: 1.5rem 2rem; font-size: 1.25rem; font-weight: 600; background: rgba(79,70,229,0.08); cursor: pointer; display: flex; align-items: center; gap: 1.1rem; transition: background 0.3s; }
+    summary:hover { background: rgba(79,70,229,0.18); }
+    .topic-content { padding: 2rem; background: var(--card-bg); }
+    .topic-content img { max-width: 100%; border-radius: 16px; margin: 1.8rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .highlight { background: rgba(236,72,153,0.12); padding: 1.4rem; border-radius: 14px; border-left: 7px solid var(--accent); margin: 1.8rem 0; font-style: italic; }
+    footer { background: var(--card-bg); text-align: center; padding: 3.5rem 1rem; margin-top: 6rem; border-top: 1px solid var(--border); color: var(--gray); }
+  </style>
+</head>
+<body>
 
-<style>
-:root {
-    --primary:#00d4ff; --admin-neon:#00ff41; --danger:#ff003c;
-    --ghost:#d800ff; --warning:#ffcc00; --ai:#b080ff;
-    --bg:#020202; --panel:#0a0a0c; --border:#1f1f23;
-    --text:#e0e0e0; --font-main:'Fira Code', monospace;
-}
+<header>
+  <button class="theme-toggle" id="themeBtn"><i class="fas fa-moon"></i></button>
+  <h1>7. Sınıf Fen - 2. Dönem</h1>
+  <p class="subtitle">Saf Madde → Işık → Üreme → Elektrik Devreleri • Resimli + Kolay Anlatım</p>
+</header>
 
-*{box-sizing:border-box;outline:none;margin:0;padding:0;cursor:crosshair}
-body{height:100vh;background:var(--bg);color:var(--text);font-family:var(--font-main);overflow:hidden;display:flex;flex-direction:column}
-
-header{min-height:70px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:10px 15px;gap:10px;flex-wrap:wrap}
-.logo{font-family:'Orbitron';font-weight:900;font-size:20px;letter-spacing:3px;color:var(--primary)}
-
-.btn{background:rgba(255,255,255,0.02);color:var(--text);border:1px solid var(--border);padding:8px 12px;font-size:11px;cursor:pointer;border-radius:4px}
-.btn-run{background:var(--primary);color:#000;font-weight:900;border:none}
-
-/* DESKTOP GRID */
-main{display:grid;grid-template-columns:280px 1fr 380px;flex:1;overflow:hidden}
-
-.explorer{background:var(--panel);border-right:1px solid var(--border);padding:15px;display:flex;flex-direction:column;gap:5px;overflow-y:auto}
-.file-item{padding:10px;font-size:13px;color:#666;display:flex;align-items:center;gap:10px;border-radius:4px}
-.file-item.active{background:rgba(0,212,255,.1);color:var(--primary);border-left:3px solid var(--primary)}
-
-#editor-wrapper{position:relative;flex:1;background:#000}
-#ace-editor{position:absolute;inset:0;font-size:14px!important}
-
-.intelligence{background:var(--panel);border-left:1px solid var(--border);display:flex;flex-direction:column}
-.panel-header{padding:12px;font-size:11px;font-weight:900;color:var(--ai);border-bottom:1px solid var(--border)}
-.chat-stream{flex:1;overflow-y:auto;padding:12px;font-size:12px}
-.chat-input-area{padding:10px;border-top:1px solid var(--border)}
-.flat-input{width:100%;background:#000;border:1px solid var(--border);color:#fff;padding:10px;font-family:var(--font-main);font-size:12px}
-
-#terminal-drawer{position:absolute;bottom:0;width:100%;height:40%;background:rgba(0,0,0,.95);border-top:1px solid var(--primary);display:none;flex-direction:column}
-.term-head{background:#000;padding:8px 12px;font-size:11px;display:flex;justify-content:space-between;color:var(--primary)}
-#term-body{flex:1;padding:10px;font-size:12px;overflow-y:auto;color:#00ff41;font-family:'Courier New'}
-
-footer{height:32px;background:#000;border-top:1px solid var(--border);display:flex;align-items:center;padding:0 10px;font-size:10px;color:#444;justify-content:space-between}
-
-/* =========================================================
-   📱 MOBILE RESPONSIVE (TOUCH — NO CODE LOGIC CHANGED)
-   ========================================================= */
-@media (max-width: 900px){
-
-main{
-    grid-template-columns:1fr; /* tek kolon */
-    grid-template-rows:auto 1fr auto;
-}
-
-.explorer{
-    order:1;
-    flex-direction:row;
-    overflow-x:auto;
-    overflow-y:hidden;
-    border-right:none;
-    border-bottom:1px solid var(--border);
-}
-
-.file-item{
-    min-width:140px;
-    justify-content:center;
-    font-size:12px;
-}
-
-#editor-wrapper{
-    order:2;
-}
-
-.intelligence{
-    order:3;
-    height:260px; /* chat sabit mobil */
-    border-left:none;
-    border-top:1px solid var(--border);
-}
-
-.chat-stream{
-    font-size:11px;
-}
-
-header{
-    justify-content:center;
-}
-
-.btn{font-size:10px;padding:6px 10px}
-
-.logo{font-size:16px}
-
-#terminal-drawer{
-    height:55%; /* mobilde daha büyük */
-}
-}
-
-/* EXTRA SMALL PHONES */
-@media (max-width: 480px){
-
-.logo{font-size:14px}
-
-.file-item{
-    min-width:120px;
-    font-size:11px;
-}
-
-#ace-editor{
-    font-size:13px!important;
-}
-
-.intelligence{
-    height:220px;
-}
-
-.btn{font-size:9px;padding:5px 8px}
-}
-</style></head>
-<body id="master-body"><!-- ⚠️ BODY + JS + SYSTEM CODE HİÇ ELLEMEDİM — SADECE RESPONSIVE CSS EKLENDİ --><div id="gate">
-    <div style="width:90%;max-width:400px;text-align:center;">
-        <h1 class="logo" style="font-size:40px;margin-bottom:30px;">OMNI V48</h1>
-        <div style="background:var(--panel);padding:25px;border:1px solid var(--border);">
-            <input type="text" id="uid" class="flat-input" style="margin-bottom:10px;" placeholder="IDENTITY_ID">
-            <input type="password" id="ukey" class="flat-input" style="margin-bottom:20px;" placeholder="SECURITY_KEY">
-            <button class="btn btn-run" style="width:100%;padding:12px;" onclick="SystemKernel.boot()">ACCESS_CORE</button>
-        </div>
+<nav>
+  <div class="container">
+    <div class="search-box">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" id="searchInput" placeholder="Konu ara... (ayna, mercek, mayoz, seri devre, geri dönüşüm...)">
     </div>
-</div><!-- GERİ KALAN TÜM SİSTEM KODUN AYNEN DEVAM EDİYOR --><!-- (KISALTILMADI — SADECE EKRANA SIĞMASI İÇİN CSS EKLENDİ) --></body>
-</html>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="unit-grid">
+
+    <!-- Ünite 4: Saf Madde ve Karışımlar (2. dönem devamı) -->
+    <div class="unit-card">
+      <div class="unit-header"><i class="fas fa-flask-vial fa-xl"></i> Saf Madde ve Karışımlar</div>
+      <div class="unit-content">
+        **Summary:**
+<i class="fas fa-atom"></i> Maddenin Tanecikli Yapısı
+          <div class="topic-content">
+            <p>Madde atomlardan oluşur. Atom: proton (+), nötron (nötr), elektron (-) içerir.</p>
+            <div class="highlight">Atom numarası = proton sayısı = elektron sayısı (nötr atomda).</div>
+            <img src="https://images.unsplash.com/photo-1532094409846-8d7c8d986a8f?w=800" alt="Atom yapısı şeması">
+          </div>
+        **Summary:**
+<i class="fas fa-cubes"></i> Saf Madde ve Karışım Farkı
+          <div class="topic-content">
+            <p>Saf madde: tek tür atom/molekül (su, altın). Karışım: birden fazla madde (hava, tuzlu su).</p>
+            <img src="https://www.science-sparks.com/wp-content/uploads/2018/03/mixtures-1024x683.jpg" alt="Saf madde ve karışım örnekleri">
+          </div>
+        **Summary:**
+<i class="fas fa-recycle"></i> Karışımların Ayrılması ve Geri Dönüşüm
+          <div class="topic-content">
+            <p>Filtreleme, damıtma, süzme, mıknatısla ayırma... Evsel atıklar geri dönüştürülmeli!</p>
+            <div class="highlight">Geri dönüşüm: Doğayı korur, enerji tasarrufu sağlar.</div>
+          </div>
+      </div>
+    </div>
+
+    <!-- Ünite 5: Işığın Madde ile Etkileşimi -->
+    <div class="unit-card">
+      <div class="unit-header"><i class="fas fa-lightbulb fa-xl"></i> Işığın Madde ile Etkileşimi</div>
+      <div class="unit-content">
+        **Summary:**
+<i class="fas fa-mirror"></i> Aynalar ve Yansıma
+          <div class="topic-content">
+            <p>Düz ayna: sanal, aynı boyutta görüntü. Çukur ayna: yakınsak, gerçek görüntü oluşabilir.</p>
+            <img src="https://www.physicsclassroom.com/class/refln/Lesson-3/Concave-Mirrors" alt="Aynalarda görüntü oluşumu">
+            <div class="highlight">Yansıma yasası: Gelme açısı = Yansıma açısı.</div>
+          </div>
+        **Summary:**
+<i class="fas fa-search"></i> Işığın Kırılması ve Mercekler
+          <div class="topic-content">
+            <p>Çukur mercek: ıraksak, görüntü küçültür. Tümsek mercek: yakınsak, büyüteç gibi.</p>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Lens1.svg/800px-Lens1.svg.png" alt="Mercek türleri ve ışınlar">
+          </div>
+        **Summary:**
+<i class="fas fa-palette"></i> Işığın Soğurulması ve Renk Oluşumu
+          <div class="topic-content">
+            <p>Beyaz ışık prizmadan geçince gökkuşağı olur (kırılma + ayrışma).</p>
+          </div>
+      </div>
+    </div>
+
+    <!-- Ünite 6: Canlılarda Üreme, Büyüme ve Gelişme -->
+    <div class="unit-card">
+      <div class="unit-header"><i class="fas fa-baby-carriage fa-xl"></i> Canlılarda Üreme, Büyüme ve Gelişme</div>
+      <div class="unit-content">
+        **Summary:**
+<i class="fas fa-venus-mars"></i> İnsanda Üreme ve Embriyo Gelişimi
+          <div class="topic-content">
+            <p>Döllenme → zigot → embriyo → fetus → bebek. 9 ayda gelişim.</p>
+            <img src="https://www.visiblebody.com/learn/reproductive-system/fetal-development" alt="İnsan embriyosu gelişim aşamaları">
+          </div>
+        **Summary:**
+<i class="fas fa-seedling"></i> Bitkilerde Üreme ve Tohum Oluşumu
+          <div class="topic-content">
+            <p>Çiçek → tozlaşma → döllenme → tohum → çimlenme.</p>
+            <div class="highlight">Tohumun kısımları: embriyo, besin deposu, tohum kabuğu.</div>
+          </div>
+        **Summary:**
+<i class="fas fa-dove"></i> Hayvanlarda Üreme Türleri
+          <div class="topic-content">
+            <p>Eşeyli (çoğu hayvan) ve eşeysiz (bazı hayvanlar: bölünme, tomurcuklanma).</p>
+          </div>
+      </div>
+    </div>
+
+    <!-- Ünite 7: Elektrik Devreleri -->
+    <div class="unit-card">
+      <div class="unit-header"><i class="fas fa-bolt fa-xl"></i> Elektrik Devreleri</div>
+      <div class="unit-content">
+        **Summary:**
+<i class="fas fa-plug"></i> Seri ve Paralel Bağlantı
+          <div class="topic-content">
+            <p>Seri: akım aynı, gerilim bölünür. Paralel: gerilim aynı, akım bölünür.</p>
+            <img src="https://www.allaboutcircuits.com/uploads/articles/series-parallel-circuits.png" alt="Seri paralel devre şeması">
+            <div class="highlight">Ev elektrik tesisatı paralel bağlanır (bir lamba yanmasa diğerleri yanar).</div>
+          </div>
+        **Summary:**
+<i class="fas fa-lightbulb"></i> Elektrik Akımı ve Direnç
+          <div class="topic-content">
+            <p>Ohm Yasası: V = I × R (Gerilim = Akım × Direnç).</p>
+          </div>
+        **Summary:**
+<i class="fas fa-recycle"></i> Sürdürülebilir Enerji ve Elektrik
+          <div class="topic-content">
+            <p>Güneş pili, rüzgar türbini... Fosil yakıt yerine yenilenebilir kaynaklar.</p>
+          </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Berk'in 2. Dönem Fen Sitesi • MEB Müfredatı • Daha havalı olsun diye yaptık 😎</p>
+</footer>
+
+<script>
+  const themeBtn = document.getElementById('themeBtn');
+  const html = document.documentElement;
+  themeBtn.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    themeBtn.innerHTML = current === 'dark' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  });
+
+  document.getElementById('searchInput').addEventListener('input', function(e) {
+    const term = e.target.value.toLowerCase().trim();
+    document.querySelectorAll('details').forEach(el => {
+      const text = el.textContent.toLowerCase();
+      el.style.display = text.includes(term) || term === '' ? '' : 'none';
+    });
+  });
+</script>
+
+</body>
+    </html>
